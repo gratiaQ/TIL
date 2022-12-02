@@ -1,18 +1,50 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
+import { INestApplication } from '@nestjs/common';
+import request from 'supertest';
+import passport from 'passport';
+import session from 'express-session';
+import { AppModule } from 'src/app.module';
 
-describe('UsersService', () => {
-  let service: UsersService;
+describe('AppController (e2e)', () => {
+  let app: INestApplication;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService],
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    app = moduleFixture.createNestApplication();
+    app.use(
+      session({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.COOKIE_SECRET,
+        cookie: {
+          httpOnly: true,
+        },
+      }),
+    );
+    app.use(passport.initialize());
+    app.use(passport.session());
+    await app.init();
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('/ (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
+  });
+
+  // superagent -> supertest
+  // axios -> moxios
+  it('/users/login (POST)', (done) => {
+    return request(app.getHttpServer())
+      .post('/api/users/login')
+      .send({
+        email: 'zerohch0@gmail.com',
+        password: 'nodejsbook',
+      })
+      .expect(201, done);
   });
 });
