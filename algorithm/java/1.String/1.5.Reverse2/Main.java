@@ -4,18 +4,18 @@ class Main {
     public String solution(String str) {
         String answer;
         char[] s = str.toCharArray();
-        int lt = 0, rt = str.length() - 1;
-        while (lt < rt) {
-            if (!Character.isAlphabetic(s[lt]))
-                lt++;
-            else if (!Character.isAlphabetic(s[rt]))
-                rt--;
+        int left = 0, right = str.length() - 1;
+        while (left < right) {
+            if (!Character.isAlphabetic(s[left]))
+                left++;
+            else if (!Character.isAlphabetic(s[right]))
+                right--;
             else {
-                char tmp = s[lt];
-                s[lt] = s[rt];
-                s[rt] = tmp;
-                lt++;
-                rt--;
+                char tmp = s[left];
+                s[left] = s[right];
+                s[right] = tmp;
+                left++;
+                right--;
             }
         }
         answer = String.valueOf(s);
