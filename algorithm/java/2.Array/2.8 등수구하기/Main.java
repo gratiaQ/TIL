@@ -4,7 +4,9 @@ class Main {
     public ArrayList<Integer> solution(int n, ArrayList<Integer> ns) {
         ArrayList<Integer> answer = new ArrayList<Integer>();
         ArrayList<Integer> original = new ArrayList<>();
-        System.arraycopy(ns, 0, answer, 0, n);
+        for (Integer integer : ns) {
+            original.add(integer);
+        }
 
         ns.sort(Comparator.reverseOrder());
 
