@@ -3,6 +3,7 @@ Today I Learned
 Backend
 1. NestJS
 2. PostgreSQL
+3. nodeJS
 
 Bigdata
 1. Hadoop
