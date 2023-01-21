@@ -1,23 +1,24 @@
 {
   "development": {
-    "username": "root",
+    "username": "cafe43",
     "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "nodejs_study",
+    "host": "152.67.223.19",
+    "port": 5435,
+    "dialect": "postgres"
   },
   "test": {
-    "username": "root",
+    "username": "cafe43",
     "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "nodejs_study",
+    "host": "152.67.223.19",
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
+    "username": "cafe43",
     "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "nodejs_study",
+    "host": "152.67.223.19",
+    "dialect": "postgres"
   }
 }
