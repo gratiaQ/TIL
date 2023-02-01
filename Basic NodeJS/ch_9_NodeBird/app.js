@@ -9,11 +9,22 @@ const dotenv = require('dotenv');
 
 dotenv.config(); // process.env
 const pageRouter = require('./routes/page');
+const { sequelize } = require('./models');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
 nunjucks.configure('views', { express: app, watch: true });
+
+sequelize
+  //   .sync({ force: false })
+  .sync({ force: true })
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err) => {
+    console.err(err);
+  });
 
 app.use(morgan('dev'));
 // TODO : Prod >> app.use(morgan('combinded'));
