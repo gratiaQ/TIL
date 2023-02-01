@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const passportJWT = require('passport');
+
 const User = require('../models/user');
 
 exports.join = async (req, res, next) => {
