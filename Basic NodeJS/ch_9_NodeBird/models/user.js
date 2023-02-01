@@ -14,7 +14,7 @@ class User extends Sequelize.Model {
           allowNull: false,
         },
         password: {
-          type: Sequelize.STRING(200),
+          type: Sequelize.STRING(100),
           allowNull: true,
         },
         provider: {
