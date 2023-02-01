@@ -6,7 +6,7 @@ class Post extends Sequelize.Model {
       {
         content: {
           type: Sequelize.STRING(140),
-          allowEmpty: false,
+          allowNull: false,
         },
         img: {
           type: Sequelize.STRING(200),
@@ -15,21 +15,20 @@ class Post extends Sequelize.Model {
       },
       {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         underscored: false,
-        paranoid: false,
         modelName: 'Post',
         tableName: 'posts',
+        paranoid: false,
         charset: 'utf8mb4',
-        colalte: 'utf8mb4_general_ci',
+        collate: 'utf8mb4_general_ci',
       }
     );
   }
-  static associations(db) {
+
+  static associate(db) {
     db.Post.belongsTo(db.User);
-    db.Post.belongsTo(db.Hashtag, {
-      through: 'PostHashtag',
-    });
+    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
   }
 }
 

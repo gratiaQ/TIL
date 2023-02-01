@@ -23,32 +23,30 @@ class User extends Sequelize.Model {
           defaultValue: 'local',
         },
         snsId: {
-          type: Sequelize.STRING(40),
+          type: Sequelize.STRING(30),
           allowNull: true,
         },
       },
       {
         sequelize,
-        timestamps: true, // createdAt, updatedAt
-        underscored: false, // created_at, updated_at
+        timestamps: true,
+        underscored: false,
         modelName: 'User',
         tableName: 'users',
-        paranoid: true, // deletedAt // soft deleted
-        charset: 'utf8', // utf8mb4 emoticons
-
+        paranoid: true,
+        charset: 'utf8',
         collate: 'utf8_general_ci',
       }
     );
   }
-  static associations(db) {
+
+  static associate(db) {
     db.User.hasMany(db.Post);
-    // 팔로워
     db.User.belongsToMany(db.User, {
       foreignKey: 'followingId',
       as: 'Followers',
       through: 'Follow',
     });
-    // 팔로잉
     db.User.belongsToMany(db.User, {
       foreignKey: 'followerId',
       as: 'Followings',
